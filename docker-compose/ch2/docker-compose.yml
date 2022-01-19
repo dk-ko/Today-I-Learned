@@ -1,0 +1,9 @@
+version: '3' # 해당 버전에 따라 지원하는 Docker 엔진이 달라짐 
+
+services: # 실행할 컨테이너 정의, docker run --name 과 같음 
+  nginx:
+      image: nginx # 컨테이너에서 사용할 이미지 이름
+      ports:
+        - 60080:80
+      volumes: # 호스트와 컨테이너의 디렉터리를 마운트 
+        - ./:/usr/share/nginx/html/
