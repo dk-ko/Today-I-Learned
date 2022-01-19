@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  db: # 서비스 이름 정의 
+    image: mysql:latest
+    volumes: # 하단 volumes정의에서 가져옴 
+      - db_data:/var/lib/mysql # 디렉터리 마운트  
+    environment: # mysql 설정에 필요한 값을 지정
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress # mysql container는 실행되며 해당 값을 읽어 데이터베이스 생성
+      MYSQL_USER: wordpress # .. 사용자 생성 
+      MYSQL_PASSWORD: wordpress # .. 
+
+  wordpress: # 서비스 이름 지정 
+    image: wordpress:latest # 이미지 지정
+    ports:
+      - "60000:80" # 포트 연결 
+    # restart: alwyas
+    environment: # 환경변수 지정 
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress # mysql의 환경 변수와 동일하게 지정함 
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+
+
+volumes:
+    db_data: {}
+
