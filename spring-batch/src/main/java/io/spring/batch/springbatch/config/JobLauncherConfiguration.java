@@ -14,12 +14,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
-public class JobConfiguration {
+public class JobLauncherConfiguration {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
     @Bean
-    public Job job() { // 스프링 배치의 모든 내용을 담고 있다.
+    public Job batchJob() { // 스프링 배치의 모든 내용을 담고 있다.
         return jobBuilderFactory.get("job")
                 .start(step1())
                 .next(step2())
@@ -32,6 +32,7 @@ public class JobConfiguration {
                 .tasklet(new Tasklet() {
                     @Override
                     public RepeatStatus execute(StepContribution stepContribution, ChunkContext chunkContext) throws Exception {
+                        Thread.sleep(3000);
                         System.out.println("step1 was executed.");
                         return RepeatStatus.FINISHED;
                     }
