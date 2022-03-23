@@ -18,7 +18,14 @@
     - 실행중인 서비스 멈춤
     - 멈춤 뒤 재실행시 `up` 대신 `start` 사용 가능 
 - docker-compose exec {container} {command}
-5:24~
+    - 컨테이너 안에서 명령어 실행할 때
+        - `-e`: 환경변수 설정
 - docker-compose run {service} {command}
+    - 해당 서비스에 컨테이더를 하나 더 실행한다.
+        - `-e`: 환경변수 설정
+        - `-p`: 연결할 포트를 설정
+        - `--rm`: 컨테이너 종료시 자동 삭제 
 - docker-compose down [service] = stop + kill
+    - 서비스를 멈추고 컨테이너를 삭제
+        - `-v`: 도커 볼륨도 함께 삭제 
 
